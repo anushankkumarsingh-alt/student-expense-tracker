@@ -1,4 +1,4 @@
-💰 #Student Expense Tracker
+💰 Student Expense Tracker
 
 A beginner-friendly Python application for recording, managing, and analyzing student expenses.
 

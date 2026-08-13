@@ -53,14 +53,20 @@ while True:
             }
 
             expenses.append(expense)
-            print("✅ Expense added successfully!")
+
+            with open("expenses.txt", "a") as file:
+                file.write(
+                    f"{name}|{amount}|{category}\n"
+                )
+
+            print("✅ Expense added and saved successfully!")
 
         except ValueError:
             print("❌ Please enter a valid number.")
 
     elif choice == "2":
         if not expenses:
-            print("\n📭 No expenses recorded yet.")
+            print("\n📭 No expenses recorded during this session.")
         else:
             print("\n📋 Your Expenses:")
             print("-----------------")
@@ -75,7 +81,7 @@ while True:
     elif choice == "3":
         total = sum(expense["amount"] for expense in expenses)
 
-        print(f"\n💰 Total spending: ₹{total:.2f}")
+        print(f"\n💰 Total spending this session: ₹{total:.2f}")
 
     elif choice == "4":
         print("👋 Thanks for using Student Expense Tracker!")

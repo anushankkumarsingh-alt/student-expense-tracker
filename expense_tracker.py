@@ -30,9 +30,10 @@ while True:
     print("1. Add expense")
     print("2. View expenses")
     print("3. Calculate total")
-    print("4. Exit")
+    print("4. Spending by category")
+    print("5. Exit")
 
-    choice = input("\nEnter your choice (1-4): ")
+    choice = input("\nEnter your choice (1-5): ")
 
     if choice == "1":
         name = input("What did you spend money on? ")
@@ -102,9 +103,30 @@ while True:
         print(f"\n💰 Total spending: ₹{total:.2f}")
 
     elif choice == "4":
+        if not expenses:
+            print("\n📭 No expenses recorded yet.")
+        else:
+            category_totals = {}
+
+            for expense in expenses:
+                category = expense["category"]
+                amount = expense["amount"]
+
+                if category not in category_totals:
+                    category_totals[category] = 0
+
+                category_totals[category] += amount
+
+            print("\n📊 Spending by Category:")
+            print("-----------------------")
+
+            for category, total in category_totals.items():
+                print(f"{category}: ₹{total:.2f}")
+
+    elif choice == "5":
         print("👋 Thanks for using Student Expense Tracker!")
         break
 
     else:
-        print("❌ Invalid choice. Please select 1-4.")
+        print("❌ Invalid choice. Please select 1-5.")
 

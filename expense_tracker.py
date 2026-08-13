@@ -18,6 +18,27 @@ while True:
         name = input("What did you spend money on? ")
         amount = input("How much did it cost? ")
 
+        print("\nCategories:")
+        print("1. 🍔 Food")
+        print("2. 🚗 Transport")
+        print("3. 📚 Education")
+        print("4. 🎮 Entertainment")
+        print("5. 🛍️ Shopping")
+        print("6. 📦 Other")
+
+        category_choice = input("Choose a category (1-6): ")
+
+        categories = {
+            "1": "Food",
+            "2": "Transport",
+            "3": "Education",
+            "4": "Entertainment",
+            "5": "Shopping",
+            "6": "Other"
+        }
+
+        category = categories.get(category_choice, "Other")
+
         try:
             amount = float(amount)
 
@@ -27,7 +48,8 @@ while True:
 
             expense = {
                 "name": name,
-                "amount": amount
+                "amount": amount,
+                "category": category
             }
 
             expenses.append(expense)
@@ -44,7 +66,11 @@ while True:
             print("-----------------")
 
             for expense in expenses:
-                print(f"{expense['name']}: ₹{expense['amount']:.2f}")
+                print(
+                    f"{expense['name']} | "
+                    f"{expense['category']} | "
+                    f"₹{expense['amount']:.2f}"
+                )
 
     elif choice == "3":
         total = sum(expense["amount"] for expense in expenses)
@@ -57,5 +83,4 @@ while True:
 
     else:
         print("❌ Invalid choice. Please select 1-4.")
-
 

@@ -5,6 +5,26 @@ print("--------------------------")
 
 expenses = []
 
+# Load previously saved expenses
+try:
+    with open("expenses.txt", "r") as file:
+        for line in file:
+            parts = line.strip().split("|")
+
+            if len(parts) == 3:
+                name = parts[0]
+                amount = float(parts[1])
+                category = parts[2]
+
+                expenses.append({
+                    "name": name,
+                    "amount": amount,
+                    "category": category
+                })
+
+except FileNotFoundError:
+    pass
+
 while True:
     print("\nChoose an option:")
     print("1. Add expense")
@@ -55,9 +75,7 @@ while True:
             expenses.append(expense)
 
             with open("expenses.txt", "a") as file:
-                file.write(
-                    f"{name}|{amount}|{category}\n"
-                )
+                file.write(f"{name}|{amount}|{category}\n")
 
             print("✅ Expense added and saved successfully!")
 
@@ -66,7 +84,7 @@ while True:
 
     elif choice == "2":
         if not expenses:
-            print("\n📭 No expenses recorded during this session.")
+            print("\n📭 No expenses recorded yet.")
         else:
             print("\n📋 Your Expenses:")
             print("-----------------")
@@ -81,7 +99,7 @@ while True:
     elif choice == "3":
         total = sum(expense["amount"] for expense in expenses)
 
-        print(f"\n💰 Total spending this session: ₹{total:.2f}")
+        print(f"\n💰 Total spending: ₹{total:.2f}")
 
     elif choice == "4":
         print("👋 Thanks for using Student Expense Tracker!")
